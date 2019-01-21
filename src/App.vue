@@ -1,17 +1,65 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="score">
+      <Score :teamName="teams.team1.name" :score="teams.team1.score" :color="'red-team'"></Score>
+      <Score :teamName="teams.team2.name" :score="teams.team2.score" :color="'blue-team'"></Score>
+    </div>
+
+    <div class="board">
+      <GameBoard :codenames="codenames"></GameBoard>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import GameBoard from './components/GameBoard';
+import Score from './components/Score'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    GameBoard,
+    Score
+  },
+  data () {
+    return {
+      teams: {
+        team1 : {
+          name: 'team 1',
+          score: 0
+        },
+        team2 : {
+          name: 'team 2',
+          score: 0
+        }
+      },
+      codenames: [
+        {
+          codename: 'table',
+          type: 'red'
+        },
+        {
+          codename: 'cat',
+          type: 'blue'
+        },
+        {
+          codename: 'dress',
+          type: 'neutral'
+        },
+        {
+          codename: 'moon',
+          type: 'black'
+        },
+        {
+          codename: 'lamp post',
+          type: 'neutral'
+        },
+        {
+          codename: 'apple',
+          type: 'neutral'
+        },
+      ]
+    }
   }
 }
 </script>
@@ -24,5 +72,15 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.board {
+  display: flex;
+  justify-content: center;
+}
+
+.score {
+  display: flex;
+  justify-content: space-around;
 }
 </style>
