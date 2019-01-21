@@ -1,6 +1,6 @@
 <template>
   <div class="gameboard">
-      <div v-for="codename in codenames">
+      <div v-for="codename in codenames" :key="codename.codename">
           <codename :codename="codename.codename"></codename>
       </div>
   </div>
