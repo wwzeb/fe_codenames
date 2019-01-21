@@ -22,9 +22,9 @@ export default {
 
 <style>
 .gameboard {
-    width: 90%;
-    border: 1px solid black;
     display: flex;
+    justify-content: space-between;
+    flex-direction: row;
     flex-wrap: wrap;
 }
 </style>
