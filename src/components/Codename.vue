@@ -1,6 +1,6 @@
 <template>
   <div class="codename">
-      <h1>{{ codename }}</h1>
+      <p class="title">{{ codename }}</p>
   </div>
 </template>
 
@@ -19,8 +19,12 @@ export default {
     height: 100px;
     display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     border: 1px solid #000;
     margin: 30px;
+}
+.title {
+    margin: 0;
+    font-size: 2em;
 }
 </style>
