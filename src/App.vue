@@ -1,8 +1,17 @@
 <template>
   <div id="app">
     <div class="score">
-      <Score :teamName="teams.team1.name" :score="teams.team1.score" :color="'red-team'"></Score>
-      <Score :teamName="teams.team2.name" :score="teams.team2.score" :color="'blue-team'"></Score>
+      <Score 
+        :teamName="teams.team1.name" 
+        :score="teams.team1.score" 
+        :color="'red-team'"
+      ></Score>
+
+      <Score 
+        :teamName="teams.team2.name" 
+        :score="teams.team2.score" 
+        :color="'blue-team'"
+      ></Score>
     </div>
 
     <div class="board">
