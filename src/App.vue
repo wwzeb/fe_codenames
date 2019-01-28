@@ -15,20 +15,30 @@
     </div>
 
     <div class="board">
-      <GameBoard :codenames="codenames"></GameBoard>
+      <GameBoard>
+        
+          <Codename 
+              v-for="codename in codenames" 
+              :key="codename.codename" 
+              :codename="codename.codename"
+          ></Codename>
+
+      </GameBoard>
     </div>
   </div>
 </template>
 
 <script>
 import GameBoard from './components/GameBoard';
-import Score from './components/Score'
+import Score from './components/Score';
+import Codename from './components/Codename';
 
 export default {
   name: 'app',
   components: {
     GameBoard,
-    Score
+    Score,
+    Codename
   },
   data () {
     return {
