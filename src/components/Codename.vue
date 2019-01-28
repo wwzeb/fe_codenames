@@ -1,5 +1,8 @@
 <template>
-  <div class="codename">
+  <div 
+    class="codename"
+    @click="increaseScore(type)"
+    >
       <p class="title">{{ codename }}</p>
   </div>
 </template>
@@ -8,7 +11,9 @@
 export default {
   name: 'Codename',
   props: [
-      'codename'
+      'codename',
+      'type',
+      'increaseScore'
   ]
 }
 </script>

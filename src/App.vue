@@ -16,11 +16,13 @@
 
     <div class="board">
       <GameBoard>
-        
+
           <Codename 
               v-for="codename in codenames" 
               :key="codename.codename" 
               :codename="codename.codename"
+              :type="codename.type"
+              :increaseScore="increaseScore"
           ></Codename>
 
       </GameBoard>
@@ -39,6 +41,12 @@ export default {
     GameBoard,
     Score,
     Codename
+  },
+  methods: {
+    increaseScore: function (col) {
+      if (col === 'red') this.teams.team1.score++
+      if (col === 'blue') this.teams.team2.score++
+    },
   },
   data () {
     return {
