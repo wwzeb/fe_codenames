@@ -34,6 +34,7 @@
 import GameBoard from './components/GameBoard';
 import Score from './components/Score';
 import Codename from './components/Codename';
+import WordsFile  from 'raw-loader!./assets/words.txt'
 
 const words = [];
 let wordIndex = 0;
