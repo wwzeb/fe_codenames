@@ -35,6 +35,26 @@ import GameBoard from './components/GameBoard';
 import Score from './components/Score';
 import Codename from './components/Codename';
 
+const words = [];
+let wordIndex = 0;
+Array.from(WordsFile).forEach(function(char) {
+  if (char.charCodeAt(0) != 10) {
+    if (typeof(words[wordIndex]) != "object") {
+      words[wordIndex] = new Array();
+    }
+    words[wordIndex].push(char);
+  } else {
+    words[wordIndex] = words[wordIndex].join("");
+    wordIndex++;
+  }
+})
+
+let randomWords = []
+while(randomWords.length < 25){
+    let randomNum = Math.floor(Math.random() * words.length) + 1;
+    if(randomWords.indexOf(randomNum) === -1) randomWords.push(words[randomNum]);
+}
+
 export default {
   name: 'app',
   components: {
@@ -62,27 +82,27 @@ export default {
       },
       codenames: [
         {
-          codename: 'table',
+          codename: randomWords[0],
           type: 'red'
         },
         {
-          codename: 'cat',
+          codename: randomWords[1],
           type: 'blue'
         },
         {
-          codename: 'dress',
+          codename: randomWords[2],
           type: 'neutral'
         },
         {
-          codename: 'moon',
+          codename: randomWords[3],
           type: 'black'
         },
         {
-          codename: 'lamp post',
+          codename: randomWords[4],
           type: 'neutral'
         },
         {
-          codename: 'apple',
+          codename: randomWords[5],
           type: 'neutral'
         },
       ]
