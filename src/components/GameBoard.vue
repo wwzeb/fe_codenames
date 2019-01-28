@@ -1,8 +1,12 @@
 <template>
   <div class="gameboard">
-      <div v-for="codename in codenames" :key="codename.codename">
-          <codename :codename="codename.codename"></codename>
-      </div>
+      
+    <codename 
+        v-for="codename in codenames" 
+        :key="codename.codename" 
+        :codename="codename.codename"
+    ></codename>
+
   </div>
 </template>
 
