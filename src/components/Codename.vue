@@ -1,7 +1,7 @@
 <template>
   <div 
     class="codename"
-    @click="increaseScore(type)"
+    @click="codenameClick"
     >
       <p class="title">{{ codename }}</p>
   </div>
@@ -14,7 +14,15 @@ export default {
       'codename',
       'type',
       'increaseScore'
-  ]
+  ],
+  methods: {
+      codenameClick: function () {
+        // do stuff localy to this component
+
+        // call function being passed down from parent to increase global score
+        this.increaseScore(this.type);
+      },
+  }
 }
 </script>
 
