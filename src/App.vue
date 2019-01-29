@@ -34,26 +34,14 @@
 import GameBoard from './components/GameBoard';
 import Score from './components/Score';
 import Codename from './components/Codename';
-import WordsFile  from 'raw-loader!./assets/words.txt'
+import WordsFile  from 'raw-loader!./assets/words.txt';
 
-const words = [];
-let wordIndex = 0;
-Array.from(WordsFile).forEach(function(char) {
-  if (char.charCodeAt(0) != 10) {
-    if (typeof(words[wordIndex]) != "object") {
-      words[wordIndex] = new Array();
-    }
-    words[wordIndex].push(char);
-  } else {
-    words[wordIndex] = words[wordIndex].join("");
-    wordIndex++;
-  }
-})
+const words = WordsFile.split('\n');
 
-let randomWords = []
-while(randomWords.length < 25){
+let randomWords = [];
+while(randomWords.length <= 25){
     let randomNum = Math.floor(Math.random() * words.length) + 1;
-    if(randomWords.indexOf(randomNum) === -1) randomWords.push(words[randomNum]);
+    if(randomWords.indexOf(words[randomNum]) === -1) randomWords.push(words[randomNum]);
 }
 
 export default {
