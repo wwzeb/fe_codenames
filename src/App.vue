@@ -52,7 +52,6 @@ export default {
     Codename
   },
   created: function() {
-    const words = WordsFile.split('\n');
     while(this.codenames.length <= 25){
         let randomNum = Math.floor(Math.random() * words.length) + 1;
         if(this.codenames.filter(codename => (codename.codename === words[randomNum])).length == 0) {

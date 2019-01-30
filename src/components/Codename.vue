@@ -1,7 +1,7 @@
 <template>
   <div 
-    class="codename"
     @click="codenameClick"
+    v-bind:class="['codename', clicked ? `${type}-background` : null]"
     >
       <p class="title">{{ codename }}</p>
   </div>
@@ -15,11 +15,14 @@ export default {
       'type',
       'increaseScore'
   ],
+  data () {
+      return {
+          clicked: false
+      }
+  },
   methods: {
       codenameClick: function () {
-        // do stuff localy to this component
-
-        // call function being passed down from parent to increase global score
+        this.clicked = true;
         this.increaseScore(this.type);
       },
   }
@@ -39,5 +42,21 @@ export default {
 .title {
     margin: 0;
     font-size: 2em;
+}
+.red-background {
+    background-color: red;
+    color: #fff;
+}
+.blue-background {
+    background-color: blue;
+    color: #fff;
+}
+.neutral-background {
+    background-color: #f2decd;
+    color: #000;
+}
+.black-background {
+    background-color: #000;
+    color: #fff;
 }
 </style>
