@@ -22,8 +22,8 @@ export default {
   },
   methods: {
       codenameClick: function () {
+        if (!this.clicked) this.increaseScore(this.type);
         this.clicked = true;
-        this.increaseScore(this.type);
       },
   }
 }
