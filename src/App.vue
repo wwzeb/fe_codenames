@@ -55,7 +55,7 @@ export default {
     const words = WordsFile.split('\n');
     while(this.codenames.length <= 25){
         let randomNum = Math.floor(Math.random() * words.length) + 1;
-        if(this.codenames.filter(codename => (codename.codename === words[randomNum])) !== false) {
+        if(this.codenames.filter(codename => (codename.codename === words[randomNum])).length == 0) {
           let obj = {};
           obj["codename"] = words[randomNum];
           obj["type"] = "red"; // This needs to be randomised too
