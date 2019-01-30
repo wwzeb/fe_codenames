@@ -36,14 +36,6 @@ import Score from './components/Score';
 import Codename from './components/Codename';
 import WordsFile  from 'raw-loader!./assets/words.txt';
 
-const words = WordsFile.split('\n');
-
-let randomWords = [];
-while(randomWords.length <= 25){
-    let randomNum = Math.floor(Math.random() * words.length) + 1;
-    if(randomWords.indexOf(words[randomNum]) === -1) randomWords.push(words[randomNum]);
-}
-
 export default {
   name: 'app',
   components: {
@@ -52,6 +44,7 @@ export default {
     Codename
   },
   created: function() {
+    const words = WordsFile.split('\n');
     while(this.codenames.length <= 25){
         let randomNum = Math.floor(Math.random() * words.length) + 1;
         if(this.codenames.filter(codename => (codename.codename === words[randomNum])).length == 0) {
