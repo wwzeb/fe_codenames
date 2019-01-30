@@ -45,21 +45,43 @@ export default {
   },
   created: function() {
     const words = WordsFile.split('\n');
-    while(this.codenames.length <= 25){
-        let randomNum = Math.floor(Math.random() * words.length) + 1;
-        if(this.codenames.filter(codename => (codename.codename === words[randomNum])).length == 0) {
-          let obj = {};
-          obj["codename"] = words[randomNum];
-          obj["type"] = "red"; // This needs to be randomised too
-          this.codenames.push(obj);
-        }
+
+    let randomWords = [];
+    while(randomWords.length <= 24){
+      let randomNum = Math.floor(Math.random() * words.length) + 1;
+      if(randomWords.indexOf(words[randomNum]) === -1) randomWords.push(words[randomNum]);
     }
+
+    this.codenames = randomWords.map(word => {
+      return {
+        codename: word,
+        type: this.selectRandomColor(this.types),
+      }
+    });
   },
   methods: {
     increaseScore: function (col) {
       if (col === 'red') this.teams.team1.score++
       if (col === 'blue') this.teams.team2.score++
     },
+    selectRandomColor: function (obj) {
+      const typeArr = Object.keys(obj);
+      let randomNum = Math.floor(Math.random() * typeArr.length);
+      let randomKey = typeArr[randomNum];
+
+      if (obj[randomKey] > 0) {
+        for(let [key, value] of Object.entries(obj)) {
+            if(key.toString() == randomKey) {
+                obj[key] = value - 1
+            }
+        }
+        this.types = {...obj};
+        return randomKey;
+      } else if (obj[randomKey] === 0) {
+        delete this.types[randomKey]
+        return this.selectRandomColor(this.types);
+      }
+    }
   },
   data () {
     return {
@@ -73,7 +95,13 @@ export default {
           score: 0
         }
       },
-      codenames: []
+      codenames: [],
+      types: {
+        red: 9,
+        blue: 9,
+        black: 1,
+        neutral: 6
+      }
     }
   }
 }
