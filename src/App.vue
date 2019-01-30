@@ -51,6 +51,18 @@ export default {
     Score,
     Codename
   },
+  created: function() {
+    const words = WordsFile.split('\n');
+    while(this.codenames.length <= 25){
+        let randomNum = Math.floor(Math.random() * words.length) + 1;
+        if(this.codenames.filter(codename => (codename.codename === words[randomNum])) !== false) {
+          let obj = {};
+          obj["codename"] = words[randomNum];
+          obj["type"] = "red"; // This needs to be randomised too
+          this.codenames.push(obj);
+        }
+    }
+  },
   methods: {
     increaseScore: function (col) {
       if (col === 'red') this.teams.team1.score++
@@ -69,32 +81,7 @@ export default {
           score: 0
         }
       },
-      codenames: [
-        {
-          codename: randomWords[0],
-          type: 'red'
-        },
-        {
-          codename: randomWords[1],
-          type: 'blue'
-        },
-        {
-          codename: randomWords[2],
-          type: 'neutral'
-        },
-        {
-          codename: randomWords[3],
-          type: 'black'
-        },
-        {
-          codename: randomWords[4],
-          type: 'neutral'
-        },
-        {
-          codename: randomWords[5],
-          type: 'neutral'
-        },
-      ]
+      codenames: []
     }
   }
 }
