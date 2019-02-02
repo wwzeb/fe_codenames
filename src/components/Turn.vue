@@ -3,7 +3,7 @@
     class="turn"
     v-bind:class="[color]"
     >
-      <h1>{{ teamName }}</h1>
+      <h1>{{ teamName }}'s Turn</h1>
   </div>
 </template>
 

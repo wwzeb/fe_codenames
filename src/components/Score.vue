@@ -4,7 +4,7 @@
     v-bind:class="[color]"
     >
       <h1>{{ teamName }}</h1>
-      <h1>{{ score }}</h1>
+      <h1>{{ score }} / {{ total }}</h1>
   </div>
 </template>
 
@@ -14,16 +14,17 @@ export default {
   props: [
       'teamName',
       'score',
-      'color'
+      'color',
+      'total'
   ]
 }
 </script>
 
 <style>
-.red-team {
+.red {
     color: red;
 }
-.blue-team {
+.blue {
     color: blue;
 }
 </style>

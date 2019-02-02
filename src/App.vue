@@ -5,23 +5,28 @@
         :teamName="teams.team1.name" 
         :score="teams.team1.score" 
         :color="teams.team1.color"
+        :total="totals[teams.team1.color]"
       ></Score>
 
-      <Turn
-        :turn="teams.team1.name"
+      <Turn v-if="turn == 1"
+        :teamName="teams.team1.name"
         :color="teams.team1.color"
+      ></Turn>
+      <Turn v-else
+        :teamName="teams.team2.name"
+        :color="teams.team2.color"
       ></Turn>
 
       <Score 
         :teamName="teams.team2.name" 
         :score="teams.team2.score" 
         :color="teams.team2.color"
+        :total="totals[teams.team2.color]"
       ></Score>
     </div>
 
     <div class="board">
       <GameBoard>
-
           <Codename 
               v-for="codename in codenames" 
               :key="codename.codename" 
@@ -29,7 +34,6 @@
               :type="codename.type"
               :increaseScore="increaseScore"
           ></Codename>
-
       </GameBoard>
     </div>
   </div>
@@ -51,26 +55,46 @@ export default {
     Turn
   },
   created: function() {
-    const words = WordsFile.split('\n');
-    let randomWords = [];
-    while(randomWords.length <= 24){
-      let randomNum = Math.floor(Math.random() * words.length) + 1;
-      if(randomWords.indexOf(words[randomNum]) === -1) randomWords.push(words[randomNum]);
-    }
-    this.codenames = randomWords.map(word => {
-      return {
-        codename: word,
-        type: this.selectRandomColor(this.types),
-      }
-    });
-    let coinFlip = Math.round(Math.random()) + 1;
-    this.teams["team" + coinFlip]["color"] = "red-team";
-    this.teams["team" + ((coinFlip % 2) + 1)]["color"] = "blue-team";
+    this.setCodenames();
+    this.setTeamColors();
   },
   methods: {
+    setCodenames: function() {
+      this.codenames = this.getRandomWords().map(word => {
+        return {
+          codename: word,
+          type: this.selectRandomColor(this.types),
+        }
+      });
+    },
+    getRandomWords: function() {
+      let words = WordsFile.split('\n');
+      let randomWords = [];
+      while(randomWords.length <= 24){
+        let randomNum = Math.floor(Math.random() * words.length) + 1;
+        if(randomWords.indexOf(words[randomNum]) === -1) randomWords.push(words[randomNum]);
+      }
+      return randomWords;
+    },
     increaseScore: function (col) {
-      if (col === 'red') this.teams.team1.score++
-      if (col === 'blue') this.teams.team2.score++
+      let opposingTeamIndex = ((this.turn % 2) + 1);
+      switch (col) {
+        case this.teams["team" + this.turn].color:
+          this.teams["team" + this.turn].score++;
+          break;
+        case this.teams["team" + opposingTeamIndex].color:
+          this.teams["team" + opposingTeamIndex].score++;
+          this.turn = opposingTeamIndex;
+          break;
+        case "neutral":
+          this.turn = opposingTeamIndex;
+          break;
+        case "black":
+          alert("Team " + opposingTeamIndex + " Wins!");
+          break;
+        default:
+          break;
+      }
     },
     selectRandomColor: function (obj) {
       const typeArr = Object.keys(obj);
@@ -80,7 +104,9 @@ export default {
       if (obj[randomKey] > 0) {
         for(let [key, value] of Object.entries(obj)) {
             if(key.toString() == randomKey) {
-                obj[key] = value - 1
+              obj[key] = value - 1
+              if (randomKey == "red" || randomKey == "blue")
+                this.totals[randomKey]++;
             }
         }
         this.types = {...obj};
@@ -89,6 +115,11 @@ export default {
         delete this.types[randomKey]
         return this.selectRandomColor(this.types);
       }
+    },
+    setTeamColors: function() {    
+      let coinFlip = Math.round(Math.random()) + 1;
+      this.teams["team" + coinFlip]["color"] = "red";
+      this.teams["team" + ((coinFlip % 2) + 1)]["color"] = "blue";
     }
   },
   data () {
@@ -109,7 +140,12 @@ export default {
         blue: 9,
         black: 1,
         neutral: 6
-      }
+      },
+      totals: {
+        red: 0,
+        blue: 0
+      },
+      turn: 1
     }
   }
 }
