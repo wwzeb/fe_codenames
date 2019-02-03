@@ -1,7 +1,7 @@
 <template>
   <div 
     @click="codenameClick"
-    v-bind:class="['codename', clicked ? `${type}-background` : null]"
+    v-bind:class="['codename', show ? `${type}-background` : null]"
     >
       <p class="title">{{ codename }}</p>
   </div>
@@ -17,13 +17,13 @@ export default {
   ],
   data () {
       return {
-          clicked: false
+          show: false
       }
   },
   methods: {
       codenameClick: function () {
-        if (this.clicked) return;
-        this.clicked = true;
+        if (this.show) return;
+        this.show = true;
         this.increaseScore(this.type);
       },
   }
