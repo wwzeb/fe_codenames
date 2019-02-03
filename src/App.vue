@@ -79,22 +79,36 @@ export default {
     increaseScore: function (col) {
       let opposingTeamIndex = ((this.turn % 2) + 1);
       switch (col) {
+        // Team clicks own color
         case this.teams["team" + this.turn].color:
           this.teams["team" + this.turn].score++;
+          this.checkIfWin("team" + this.turn);
           break;
+        // Team clicks other teams color
         case this.teams["team" + opposingTeamIndex].color:
           this.teams["team" + opposingTeamIndex].score++;
           this.turn = opposingTeamIndex;
+          this.checkIfWin("team" + opposingTeamIndex);
           break;
+        // Team clicks neutral
         case "neutral":
           this.turn = opposingTeamIndex;
           break;
+        // Team clicks black
         case "black":
-          alert("Team " + opposingTeamIndex + " Wins!");
+          this.win("team" + opposingTeamIndex);
           break;
         default:
           break;
       }
+    },
+    checkIfWin: function (team) {
+      if (this.teams[team].score >= this.totals[this.teams[team].color]) {
+        this.win(team);
+      }
+    },
+    win: function (team) {
+      alert(this.teams[team].name + " Wins!");
     },
     selectRandomColor: function (obj) {
       const typeArr = Object.keys(obj);
