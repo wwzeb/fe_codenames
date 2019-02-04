@@ -25,6 +25,10 @@
       ></Score>
     </div>
 
+    <EndTurn
+      :endTurn="endTurn"
+    ></EndTurn>
+
     <div class="board">
       <GameBoard>
           <Codename 
@@ -44,6 +48,7 @@ import GameBoard from './components/GameBoard';
 import Score from './components/Score';
 import Codename from './components/Codename';
 import Turn from './components/Turn';
+import EndTurn from './components/EndTurn';
 import WordsFile  from 'raw-loader!./assets/words.txt';
 
 export default {
@@ -52,7 +57,8 @@ export default {
     GameBoard,
     Score,
     Codename,
-    Turn
+    Turn,
+    EndTurn
   },
   created: function() {
     this.setCodenames();
@@ -75,6 +81,10 @@ export default {
         if(randomWords.indexOf(words[randomNum]) === -1) randomWords.push(words[randomNum]);
       }
       return randomWords;
+    },
+    endTurn: function() {
+      console.log("endturn");
+      this.turn = ((this.turn % 2) + 1);
     },
     increaseScore: function (col) {
       let opposingTeamIndex = ((this.turn % 2) + 1);
