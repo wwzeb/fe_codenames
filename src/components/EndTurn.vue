@@ -15,7 +15,6 @@ export default {
 
 <style>
 .container{
-    width: 100px;
     height: 50px;
     display: flex;
     justify-content: center;
