@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <button class="button" @click="endTurnClick">End Turn</button>
+    <button class="button" @click="endTurn">End Turn</button>
   </div>
 </template>
 
@@ -9,12 +9,7 @@ export default {
   name: 'EndTurn',
   props: [
     'endTurn'
-  ],
-  methods: {
-      endTurnClick: function() {
-          this.endTurn();
-      }
-  }
+  ]
 }
 </script>
 
