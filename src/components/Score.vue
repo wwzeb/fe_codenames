@@ -21,6 +21,17 @@ export default {
 </script>
 
 <style>
+
+.score {
+  height: 10vh;
+  padding: 1em;
+  border: 1px solid red;
+}
+
+.team-score {
+  display: flex;
+}
+
 .red {
     color: red;
 }
