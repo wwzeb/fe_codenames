@@ -184,7 +184,7 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
   user-select: none;
-  background: linear-gradient(white 80%,rgb(238, 238, 238))
+  background: linear-gradient(white 50%,rgb(238, 238, 238))
 }
 
 .turn {

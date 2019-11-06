@@ -32,14 +32,13 @@ export default {
 
 <style>
 .codename {
-    /* width: 200px;
-    height: 100px; */
     padding: 1em;
+    margin: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid #000;
-    margin: 30px;
+    background: rgb(243, 243, 243);
     box-shadow: 1px 1px 2px gray;
     border-radius: 10px;
     transition: 250ms;

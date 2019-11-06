@@ -25,7 +25,6 @@ export default {
 .score {
   height: 10vh;
   padding: 1em;
-  border: 1px solid red;
 }
 
 .team-score {
