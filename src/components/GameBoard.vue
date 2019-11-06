@@ -12,8 +12,8 @@ export default {
 
 <style>
 .gameboard {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat( 5, minmax(250px, 1fr) );
+    grid-template-rows: repeat( 5, minmax(75px, 1fr) );
 }
 </style>
